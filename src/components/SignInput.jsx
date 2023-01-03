@@ -1,21 +1,26 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const SignInput = ({ label, ...props }) => {
+const SignInput = ({ label, value, ...props }) => {
   const [isFocused, setIsFocused] = useState(false);
   const onFocusHandler = () => {
     setIsFocused(!isFocused);
   };
   return (
-    <Container bc={isFocused && "#1f59f8"} bw={isFocused && "2px"}>
-      <StInput {...props} onFocus={onFocusHandler} onBlur={onFocusHandler} />
-      <Label dp={isFocused && "block"}>
+    <Container bc={isFocused && "#9c27b0"} bw={isFocused && "2px"}>
+      <StInput
+        {...props}
+        value={value}
+        onFocus={onFocusHandler}
+        onBlur={onFocusHandler}
+      />
+      <Label dp={isFocused || value ? "block" : null}>
         <span style={{ color: "#fff" }}>{label}</span>
       </Label>
       <StSpan
-        top={isFocused && "-7px"}
-        fs={isFocused && "12px"}
-        color={isFocused && "#1f59f8"}
+        top={isFocused || value ? "-7px" : null}
+        fs={isFocused || value ? "12px" : null}
+        color={isFocused ? "#9c27b0" : null}
       >
         {label}
       </StSpan>

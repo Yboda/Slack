@@ -12,6 +12,8 @@ import {
 } from "firebase/auth";
 import md5 from "md5";
 import { getDatabase, ref, set } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { setUser } from "../Redux/modules/userSlice";
 
 const IsPasswordValid = (password, confirmPassword) => {
   if (password.length < 6 || confirmPassword.length < 6) {
@@ -24,6 +26,7 @@ const IsPasswordValid = (password, confirmPassword) => {
 };
 
 const Join = () => {
+  const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [userInfo, setUserInfo] = useState({
     nickname: "",
@@ -32,6 +35,7 @@ const Join = () => {
     confirmPassword: "",
   });
   const [isLoding, setIsLoding] = useState(false);
+
   const { nickname, email, password, confirmPassword } = userInfo;
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -67,7 +71,7 @@ const Join = () => {
         nickname: user.displayName,
         avatar: user.photoURL,
       });
-      //redux store에 저장하는 로직 추가예정
+      dispatch(setUser(user));
     } catch (e) {
       setIsLoding(false);
       console.log(e);
@@ -83,8 +87,6 @@ const Join = () => {
       clearTimeout(timer);
     };
   }, [error]);
-
-  console.log(userInfo);
 
   return (
     <Box height="100vh">

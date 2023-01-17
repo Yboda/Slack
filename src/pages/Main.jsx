@@ -1,5 +1,12 @@
+import Header from "../components/Header";
+import Box from "../elements/Box";
+
 const Main = () => {
-  return <div>Main</div>;
+  return (
+    <Box>
+      <Header />
+    </Box>
+  );
 };
 
 export default Main;

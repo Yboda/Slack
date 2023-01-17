@@ -14,6 +14,7 @@ import md5 from "md5";
 import { getDatabase, ref, set } from "firebase/database";
 import { useDispatch } from "react-redux";
 import { setUser } from "../Redux/modules/userSlice";
+import Box from "../elements/Box";
 
 const IsPasswordValid = (password, confirmPassword) => {
   if (password.length < 6 || confirmPassword.length < 6) {
@@ -155,14 +156,6 @@ const Join = () => {
 };
 
 export default Join;
-
-const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: ${({ height }) => (height ? height : "")};
-`;
 
 const Grid = styled.div`
   display: grid;

@@ -13,7 +13,7 @@ const Header = () => {
           <span>SLACK</span>
         </Content>
         <Content mr="10px" fs="15px">
-          {/* <span>{user.currentUser?.displayName}</span> */}
+          <span>{user.currentUser?.displayName}</span>
           <span>1234</span>
           <ProfileImg />
         </Content>

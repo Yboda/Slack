@@ -33,8 +33,8 @@ export default SignInput;
 const Container = styled.div`
   position: relative;
   width: 400px;
-  height: 19px;
-  padding: 16.5px 13px;
+  height: 55px;
+  padding: 5px 10px;
   border: 1px solid #c4c4c4;
   border-color: ${({ bc }) => bc};
   border-width: ${({ bw }) => bw};

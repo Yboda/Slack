@@ -2,6 +2,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, Navigate } from "react-router-dom";
+import GlobalStyle from "./GlobalStyle";
 import Join from "./pages/Join";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
@@ -23,14 +24,20 @@ function App() {
     return () => unsubscribe();
   }, [dispatch]);
   return (
-    <Routes>
-      <Route path="/" element={<Main />} />
-      <Route
-        path="/join"
-        element={currentUser ? <Navigate to="/" /> : <Join />}
-      />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <>
+      <GlobalStyle />
+      <Routes>
+        <Route
+          path="/"
+          element={currentUser ? <Main /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/join"
+          element={currentUser ? <Navigate to="/" /> : <Join />}
+        />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   );
 }
 

@@ -79,7 +79,6 @@ const ProfileImg = styled.img`
   margin-left: 5px;
   width: 30px;
   height: 30px;
-  background-color: aqua;
   border-radius: 30px;
 `;
 

@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SignInput from "../components/SignInput";
@@ -14,7 +13,9 @@ import md5 from "md5";
 import { getDatabase, ref, set } from "firebase/database";
 import { useDispatch } from "react-redux";
 import { setUser } from "../Redux/modules/userSlice";
-import Box from "../elements/Box";
+import Flex from "../elements/Flex";
+import Icon from "../elements/Icon";
+import Loading from "../components/Loading";
 
 const IsPasswordValid = (password, confirmPassword) => {
   if (password.length < 6 || confirmPassword.length < 6) {
@@ -35,7 +36,7 @@ const Join = () => {
     password: "",
     confirmPassword: "",
   });
-  const [isLoding, setIsLoding] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { nickname, email, password, confirmPassword } = userInfo;
   const onChangeHandler = (e) => {
@@ -57,7 +58,7 @@ const Join = () => {
   };
 
   const postUserData = async (nickname, email, password) => {
-    setIsLoding(true);
+    setIsLoading(true);
     try {
       const { user } = await createUserWithEmailAndPassword(
         getAuth(),
@@ -74,7 +75,7 @@ const Join = () => {
       });
       dispatch(setUser(user));
     } catch (e) {
-      setIsLoding(false);
+      setIsLoading(false);
       console.log(e);
     }
   };
@@ -90,12 +91,12 @@ const Join = () => {
   }, [error]);
 
   return (
-    <Box height="100vh">
-      <Box>
-        <Avatar sx={{ m: 0, bgcolor: "secondary.main" }}>#</Avatar>
+    <Flex height="100vh">
+      <Flex>
+        <Icon>#</Icon>
         <h2>회원가입</h2>
-      </Box>
-      <Box>
+      </Flex>
+      <Flex>
         <form onSubmit={onSubmitHandler}>
           <Grid>
             <SignInput
@@ -127,11 +128,9 @@ const Join = () => {
             />
           </Grid>
           {error && <SignAlert>{error}</SignAlert>}
-          {isLoding ? (
+          {isLoading ? (
             <StBtn type="button" bc="grey" op="1">
-              <LoadingBg>
-                <LoadingBody></LoadingBody>
-              </LoadingBg>
+              <Loading />
             </StBtn>
           ) : (
             <StBtn type="submit">
@@ -150,8 +149,8 @@ const Join = () => {
             </Link>
           </Flex>
         </form>
-      </Box>
-    </Box>
+      </Flex>
+    </Flex>
   );
 };
 
@@ -179,43 +178,5 @@ const StBtn = styled.button`
   cursor: pointer;
   :hover {
     opacity: 1;
-  }
-`;
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
-const LoadingBg = styled.div`
-  position: relative;
-  width: 30px;
-  height: 30px;
-  margin: 0 auto;
-  padding: 10px;
-`;
-
-const LoadingBody = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 15px;
-  height: 15px;
-  margin: auto;
-  border: 5px solid;
-  border-color: rgba(255, 255, 255, 1) rgba(255, 255, 255, 0.3)
-    rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.3);
-  border-radius: 48px;
-  animation: circle 1s linear infinite;
-  @keyframes circle {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 `;

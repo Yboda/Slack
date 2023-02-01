@@ -1,11 +1,11 @@
 import Header from "../components/Header";
-import Box from "../elements/Box";
+import Flex from "../elements/Flex";
 
 const Main = () => {
   return (
-    <Box>
+    <Flex>
       <Header />
-    </Box>
+    </Flex>
   );
 };
 

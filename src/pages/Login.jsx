@@ -1,4 +1,3 @@
-import { Icon } from "@mui/material";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -8,6 +7,7 @@ import Loading from "../components/Loading";
 import SignAlert from "../components/SignAlert";
 import SignInput from "../components/SignInput";
 import Flex from "../elements/Flex";
+import Icon from "../elements/Icon";
 import { useInput } from "../hooks/useInput";
 import { setUser } from "../Redux/modules/userSlice";
 

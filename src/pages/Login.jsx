@@ -1,7 +1,7 @@
-import { async } from "@firebase/util";
 import { Icon } from "@mui/material";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Loading from "../components/Loading";
@@ -9,8 +9,10 @@ import SignAlert from "../components/SignAlert";
 import SignInput from "../components/SignInput";
 import Flex from "../elements/Flex";
 import { useInput } from "../hooks/useInput";
+import { setUser } from "../Redux/modules/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePW] = useInput("");
 
@@ -19,10 +21,6 @@ const Login = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const email = data.get("email");
-    const password = data.get("password");
-    console.log(email, password);
     if (!email || !password) {
       setError("모든 항목을 입력해주세요");
     }
@@ -32,7 +30,12 @@ const Login = () => {
   const loginUser = async (email, password) => {
     setIsLoading(true);
     try {
-      await signInWithEmailAndPassword(getAuth(), email, password);
+      const { user } = await signInWithEmailAndPassword(
+        getAuth(),
+        email,
+        password
+      );
+      dispatch(setUser(user));
     } catch (err) {
       console.log(err);
       setError(err.message);

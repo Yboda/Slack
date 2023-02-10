@@ -24,7 +24,7 @@ const Header = () => {
           <div>#</div>
           <span>SLACK</span>
         </Content>
-        <Content mr="10px" fs="18px" onClick={openHandler}>
+        <Content mr="10px" fs="16px" onClick={openHandler}>
           <span>{user.currentUser?.displayName}</span>
           <ProfileImg src={user.currentUser?.photoURL} />
         </Content>
@@ -44,7 +44,6 @@ export default Header;
 const Container = styled.div`
   position: fixed;
   top: 0;
-  right: 0;
   z-index: 5;
   color: #9a939b;
   background-color: #350d36;
@@ -53,6 +52,7 @@ const Container = styled.div`
 `;
 
 const ContentsWrap = styled.div`
+  padding: 0 15px;
   width: 100%;
   height: 100%;
   position: absolute;
